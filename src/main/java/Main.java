@@ -1,3 +1,6 @@
+import Animals.Animal;
+import Animals.Predators.Wolf;
+
 /**
  * @author Nikolay Gabaraev
  * @created 29.04.2022
