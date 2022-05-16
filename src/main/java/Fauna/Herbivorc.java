@@ -1,5 +1,7 @@
 package Fauna;
 
+import java.util.List;
+
 /**
  * @author Nikolay Gabaraev
  * @created 14.05.2022
@@ -12,8 +14,17 @@ public class Herbivorc extends Animal {
     }
 
     @Override
-    public void eat() {
-        System.out.println("Травоядное пытается поесть");
+    public void eat() {}
+    @Override
+    public void eat(List<Herb> herbs) {
+        if (this.getSatiety() < this.getMaxSatiety()) {
+            double diff = this.getMaxSatiety() - this.getSatiety();
+            this.setSatiety(this.getMaxSatiety());
+            for (int i = 0; i < diff; i++) {
+                herbs.remove(i);
+            }
+            System.out.println("Травоядное ест травы - " + diff);
+        }
     }
 
     @Override

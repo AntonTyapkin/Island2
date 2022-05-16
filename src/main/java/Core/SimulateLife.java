@@ -23,7 +23,8 @@ public class SimulateLife implements Runnable {
         for (int i = 0; i < objects.length; i++) {
             for (int j = 0; j < objects[i].length; j++) {
                 decreaseSatiety(objects[i][j]);
-                tryToreproduction(objects[i][j]);
+                tryToEat(objects[i][j]);
+                //tryToReproduction(objects[i][j]);
             }
         }
 
@@ -31,7 +32,7 @@ public class SimulateLife implements Runnable {
     }
 
 
-    public void tryToreproduction(Cell cell) {
+    public void tryToReproduction(Cell cell) {
         cell.tryToReproductionPredators();
     }
 
@@ -40,7 +41,10 @@ public class SimulateLife implements Runnable {
     }
 
     //TO DO
-    public void tryToEat() {}
+    public void tryToEat(Cell cell) {
+       // cell.tryToEatPredators();
+        cell.tryToEatHerbivores();
+    }
     public void tryToMove() {}
 
 

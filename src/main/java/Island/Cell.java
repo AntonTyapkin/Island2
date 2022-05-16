@@ -239,19 +239,27 @@ public class Cell {
 
     public void decreaseSatiety() {
         for (Animal predator : predators) {
-            if (predator.getSatiety() <= 0) {
+            if (predator.getStarvingTime() <= 0) {
                 predators.remove(predator);
             } else {
                 predator.decreaseSatiety();
             }
         }
         for (Animal herbivor : herbivors) {
-            if (herbivor.getSatiety() <= 0) {
+            if (herbivor.getStarvingTime() <= 0) {
                 herbivors.remove(herbivor);
             } else {
                 herbivor.decreaseSatiety();
             }
         }
+    }
+
+    public void tryToEatPredators(){
+
+    }
+
+    public void tryToEatHerbivores() {
+        herbivors.forEach(animal -> animal.eat(herbs));
     }
 
 }

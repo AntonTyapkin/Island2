@@ -1,5 +1,7 @@
 package Fauna;
 
+import java.util.List;
+
 /**
  * @author Nikolay Gabaraev
  * @created 14.05.2022
@@ -13,7 +15,13 @@ public class Predatorc extends Animal {
 
     @Override
     public void eat() {
-        System.out.println("Хищник пытается поесть");
+        double satiety = this.getSatiety();
+        //if ()
+    }
+
+    @Override
+    public void eat(List<Herb> herbs) {
+
     }
 
     @Override

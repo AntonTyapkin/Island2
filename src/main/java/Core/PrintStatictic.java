@@ -20,7 +20,7 @@ public class PrintStatictic implements Runnable {
     @Override
     public void run() {
         System.out.println("Итерация - " + this.iter + ". Печатаю статистку");
-        addHerbs(objects);
+        //addHerbs(objects);
         printStat(objects);
         this.iter++;
     }

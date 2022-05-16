@@ -8,8 +8,9 @@ package Fauna.Predators;
 
 import Fauna.Animal;
 import Fauna.Predator;
+import Fauna.Predatorc;
 
-public class Wolf extends Animal implements Predator {
+public class Wolf extends Predatorc implements Predator{
 
     private static int maxOnCell = 30;
 

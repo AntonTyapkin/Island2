@@ -24,8 +24,9 @@ public class Main {
         SimulateLife simLife = new SimulateLife(objects);
         //Шедулер потока статистики и роста
         ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService ses2 = Executors.newScheduledThreadPool(10);
         ScheduledFuture<?> sF = ses.scheduleAtFixedRate(prs, 0, 2, TimeUnit.SECONDS);
-        ScheduledFuture<?> simulateLife = ses.scheduleAtFixedRate(simLife, 0, 500, TimeUnit.MILLISECONDS);
+        ScheduledFuture<?> simulateLife = ses2.scheduleAtFixedRate(simLife, 0, 500, TimeUnit.MILLISECONDS);
 
         int iter = 0;
         while (true) {
@@ -38,6 +39,7 @@ public class Main {
                     sF.cancel(true);
                     simulateLife.cancel(true);
                     ses.shutdown();
+                    ses2.shutdown();
                     break;
                 }
             } catch (InterruptedException e) {
