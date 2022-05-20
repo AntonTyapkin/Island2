@@ -6,13 +6,14 @@ package Fauna.Herbivores;
  * @project JavaRush_Module-2
  */
 
+import Core.Settings;
 import Fauna.Animal;
 import Fauna.Herbivor;
 import Fauna.Herbivorc;
 
 public class Rabbit extends Herbivorc implements Herbivor {
 
-    private static int maxOnCell = 750;
+    private static int maxOnCell = Settings.rabbitMaxOnCell;
 
     public Rabbit() {
         super(3, 3, 0.45, 7);

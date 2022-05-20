@@ -6,6 +6,7 @@ package Fauna.Herbivores;
  * @project JavaRush_Module-2
  */
 
+import Core.Settings;
 import Fauna.Animal;
 import Fauna.Herbivor;
 import Fauna.Herbivorc;
@@ -13,7 +14,7 @@ import Fauna.Predator;
 
 public class Horse extends Herbivorc implements Herbivor {
 
-    private static int maxOnCell = 23;
+    private static int maxOnCell = Settings.horseMaxOnCell;
 
     public Horse() {
         super(300, 3, 45, 5);

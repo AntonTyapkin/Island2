@@ -1,6 +1,9 @@
 package Fauna;
 
+import Fauna.Predators.Wolf;
+
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Nikolay Gabaraev
@@ -12,6 +15,7 @@ public abstract class Animal {
     private int speed;
     private double maxSatiety;
     private double satiety;
+    private int maxStarvingTime;
     private int starvingTime;
     private int gender;
 
@@ -20,6 +24,7 @@ public abstract class Animal {
         this.speed = speed;
         this.maxSatiety = satiety;
         this.satiety = satiety;
+        this.maxStarvingTime = starvingTime;
         this.starvingTime = starvingTime;
         setGender();
     }
@@ -46,12 +51,19 @@ public abstract class Animal {
     public void setSatiety(double satiety) {
         this.satiety = satiety;
     }
+    public void setStarvingTime(int starvingTime) {
+        this.starvingTime = starvingTime;
+    }
 
     public void decreaseSatiety() {
-        if(this.satiety == 0) {
+        if(this.satiety <= 0) {
             this.starvingTime--;
         } else {
-            this.satiety--;
+            //double rand = ThreadLocalRandom.current().nextDouble(1, this.getMaxSatiety());
+            //System.out.println(rand);
+            int rand = 1 + (int) (Math.random() * ((this.maxSatiety - 1)));
+            this.satiety = this.satiety - rand;
+            //System.out.println(this.satiety + " " + this.starvingTime + " " + getClass());
         }
     }
 
@@ -61,5 +73,8 @@ public abstract class Animal {
 
     public double getMaxSatiety() {
         return maxSatiety;
+    }
+    public int getMaxStarvingTime() {
+        return maxStarvingTime;
     }
 }

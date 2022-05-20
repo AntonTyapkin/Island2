@@ -6,12 +6,13 @@ package Fauna.Herbivores;
  * @project JavaRush_Module-2
  */
 
+import Core.Settings;
 import Fauna.Herbivor;
 import Fauna.Herbivorc;
 
 public class Caterpillar extends Herbivorc implements Herbivor {
 
-    private static int maxOnCell = 10000;
+    private static int maxOnCell = Settings.caterpillarMaxOnCell;
 
     public Caterpillar() {
         super(0.01, 1, 0.0025, 1);

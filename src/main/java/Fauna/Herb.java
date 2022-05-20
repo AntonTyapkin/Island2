@@ -5,11 +5,13 @@ package Fauna;
  * @project JavaRush_Module-2
  */
 
+import Core.Settings;
+
 import java.util.Objects;
 
 public class Herb {
     private double weigh;
-    private static int maxOnCell = 10000;
+    private static int maxOnCell = Settings.herbsMaxOnCell;
 
     public Herb() {
         this.weigh = 1;

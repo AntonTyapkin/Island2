@@ -6,19 +6,33 @@ package Island;
  * @project JavaRush_Module-2
  */
 
+import Core.ScanClasses;
+import Core.Settings;
 import Fauna.Animal;
 import Fauna.Herb;
 import Fauna.Herbivor;
 import Fauna.Herbivores.*;
 import Fauna.Predators.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Cell {
     private final List<Animal> predators = new CopyOnWriteArrayList<>();
+    //private final List<Animal> predators = Collections.synchronizedList(new ArrayList<>());
     private final List<Animal> herbivors = new CopyOnWriteArrayList<>();
+    //private final List<Animal> herbivors = Collections.synchronizedList(new ArrayList<>());
     private final List<Herb> herbs = new CopyOnWriteArrayList<>();
+    //private final List<Herb> herbs = Collections.synchronizedList(new ArrayList<>());
+    Set<Class> predatorsClasses = ScanClasses.getPredatorsClasses();
+    Set<Class> herbivoresClasses = ScanClasses.getHerbivoresClasses();
 
     public Cell() {
         generatePredators();
@@ -27,68 +41,40 @@ public class Cell {
     }
 
     private void generatePredators() {
-        int countCreateWolf = 1 + (int) (Math.random() * ((Wolf.getMaxOnCell() - 1)));
-        int countCreateBear = 1 + (int) (Math.random() * ((Bear.getMaxOnCell() - 1)));
-        int countCreateEagle = 1 + (int) (Math.random() * ((Eagle.getMaxOnCell() - 1)));
-        int countCreateFox = 1 + (int) (Math.random() * ((Fox.getMaxOnCell() - 1)));
-        int countCreateSnake = 1 + (int) (Math.random() * ((Snake.getMaxOnCell() - 1)));
-        for (int k = 0; k <= countCreateWolf; k++) {
-            predators.add(new Wolf());
-        }
-        for (int k = 0; k <= countCreateBear; k++) {
-            predators.add(new Bear());
-        }
-        for (int k = 0; k <= countCreateEagle; k++) {
-            predators.add(new Eagle());
-        }
-        for (int k = 0; k <= countCreateFox; k++) {
-            predators.add(new Fox());
-        }
-        for (int k = 0; k <= countCreateSnake; k++) {
-            predators.add(new Snake());
+        for (Class c : predatorsClasses) {
+            try {
+                Field maxOnCellField = c.getDeclaredField("maxOnCell");
+                maxOnCellField.setAccessible(true);
+                int maxOnCell = (int) maxOnCellField.get(null);
+                int count = 1 + (int) (Math.random() * ((maxOnCell - 1)));
+                Constructor<Animal> constr = c.getConstructor();
+                for (int k = 0; k <= count; k++) {
+                    Animal animal = constr.newInstance();
+                    predators.add(animal);
+                }
+            } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException |
+                     InstantiationException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     private void generateHerbivores() {
-        int countCreateHorse = 1 + (int) (Math.random() * ((Horse.getMaxOnCell() - 1)));
-        int countCreateDeer = 1 + (int) (Math.random() * ((Deer.getMaxOnCell() - 1)));
-        int countCreateRabbit = 1 + (int) (Math.random() * ((Rabbit.getMaxOnCell() - 1)));
-        int countCreateHamster = 1 + (int) (Math.random() * ((Hamster.getMaxOnCell() - 1)));
-        int countCreateGoat = 1 + (int) (Math.random() * ((Goat.getMaxOnCell() - 1)));
-        int countCreateSheep = 1 + (int) (Math.random() * ((Sheep.getMaxOnCell() - 1)));
-        int countCreateKangoroo = 1 + (int) (Math.random() * ((Kangoroo.getMaxOnCell() - 1)));
-        int countCreateCow = 1 + (int) (Math.random() * ((Cow.getMaxOnCell() - 1)));
-        int countCreateDuck = 1 + (int) (Math.random() * ((Duck.getMaxOnCell() - 1)));
-        int countCreateCaterpillar = 1 + (int) (Math.random() * ((Caterpillar.getMaxOnCell() - 1)));
-        for (int k = 0; k <= countCreateHorse; k++) {
-            herbivors.add(new Horse());
-        }
-        for (int k = 0; k <= countCreateDeer; k++) {
-            herbivors.add(new Deer());
-        }
-        for (int k = 0; k <= countCreateRabbit; k++) {
-            herbivors.add(new Rabbit());
-        }
-        for (int k = 0; k <= countCreateHamster; k++) {
-            herbivors.add(new Hamster());
-        }
-        for (int k = 0; k <= countCreateGoat; k++) {
-            herbivors.add(new Goat());
-        }
-        for (int k = 0; k <= countCreateSheep; k++) {
-            herbivors.add(new Sheep());
-        }
-        for (int k = 0; k <= countCreateKangoroo; k++) {
-            herbivors.add(new Kangoroo());
-        }
-        for (int k = 0; k <= countCreateCow; k++) {
-            herbivors.add(new Cow());
-        }
-        for (int k = 0; k <= countCreateDuck; k++) {
-            herbivors.add(new Duck());
-        }
-        for (int k = 0; k <= countCreateCaterpillar; k++) {
-            herbivors.add(new Caterpillar());
+        for (Class c : herbivoresClasses) {
+            try {
+                Field maxOnCellField = c.getDeclaredField("maxOnCell");
+                maxOnCellField.setAccessible(true);
+                int maxOnCell = (int) maxOnCellField.get(null);
+                int count = 1 + (int) (Math.random() * ((maxOnCell - 1)));
+                Constructor<Animal> constr = c.getConstructor();
+                for (int k = 0; k <= count; k++) {
+                    Animal animal = constr.newInstance();
+                    herbivors.add(animal);
+                }
+            } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException |
+                     InstantiationException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -105,10 +91,18 @@ public class Cell {
     }
 
     public void addHerb() {
-        //int getIntCalculate = 1 + (int) (Math.random() * ((this.herbs.size() - 1)));
-        if (this.herbs.size() < 10000) {
-            this.herbs.add(new Herb());
+
+        if (this.herbs.size() < Settings.herbsMaxOnCell) {
+            int diff = Settings.herbsMaxOnCell - this.herbs.size();
+            int getIntCalculate = 1 + (int) (Math.random() * ((diff - 1)));
+            for (int i = 0; i < getIntCalculate; i++) {
+                this.herbs.add(new Herb());
+            }
         }
+    }
+
+    public void removeHerb() {
+        this.herbs.remove(0);
     }
 
     public long countHerbs() {
@@ -259,7 +253,12 @@ public class Cell {
     }
 
     public void tryToEatHerbivores() {
-        herbivors.forEach(animal -> animal.eat(herbs));
+        for (Animal herbivor : herbivors) {
+            herbivor.eat(herbs);
+        }
+//        for (int i = 0; i < 10;i++) {
+//            removeHerb();
+//        }
     }
 
 }

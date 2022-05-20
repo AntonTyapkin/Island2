@@ -10,8 +10,8 @@ import Island.Cell;
 
 public class SimulateLife implements Runnable {
 
-    private int iter;
-    private Cell[][] objects;
+    private int iterSimulate;
+    private final Cell[][] objects;
 
     public SimulateLife(Cell[][] objects) {
         this.objects = objects;
@@ -19,16 +19,17 @@ public class SimulateLife implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("СИМУЛЯЦИЯ ЖИЗНИ ПРОХОД " + this.iter + ".");
+        System.out.println("СИМУЛЯЦИЯ ЖИЗНИ ПРОХОД " + this.iterSimulate + ".");
         for (int i = 0; i < objects.length; i++) {
             for (int j = 0; j < objects[i].length; j++) {
-                decreaseSatiety(objects[i][j]);
+                System.out.println("Уменьшаю сытость");
+                objects[i][j].decreaseSatiety();
+                System.out.println("Пробую есть");
                 tryToEat(objects[i][j]);
                 //tryToReproduction(objects[i][j]);
             }
         }
-
-        this.iter++;
+        this.iterSimulate++;
     }
 
 
@@ -36,12 +37,8 @@ public class SimulateLife implements Runnable {
         cell.tryToReproductionPredators();
     }
 
-    public void decreaseSatiety(Cell cell) {
-        cell.decreaseSatiety();
-    }
-
     //TO DO
-    public void tryToEat(Cell cell) {
+    public synchronized void tryToEat(Cell cell) {
        // cell.tryToEatPredators();
         cell.tryToEatHerbivores();
     }

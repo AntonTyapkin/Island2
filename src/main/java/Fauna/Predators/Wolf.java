@@ -6,13 +6,14 @@ package Fauna.Predators;
  * @project JavaRush_Module-2
  */
 
+import Core.Settings;
 import Fauna.Animal;
 import Fauna.Predator;
 import Fauna.Predatorc;
 
 public class Wolf extends Predatorc implements Predator{
 
-    private static int maxOnCell = 30;
+    private static int maxOnCell = Settings.wolfMaxOnCell;
 
     public Wolf() {
         super(50, 3, 8, 10);

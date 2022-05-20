@@ -6,13 +6,14 @@ package Fauna.Herbivores;
  * @project JavaRush_Module-2
  */
 
+import Core.Settings;
 import Fauna.Animal;
 import Fauna.Herbivor;
 import Fauna.Herbivorc;
 
 public class Duck extends Herbivorc implements Herbivor {
 
-    private static int maxOnCell = 500;
+    private static int maxOnCell = Settings.duckMaxOnCell;
 
     public Duck() {
         super(1, 1, 0.15, 4);

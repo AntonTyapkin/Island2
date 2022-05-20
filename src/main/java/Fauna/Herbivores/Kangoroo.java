@@ -6,13 +6,14 @@ package Fauna.Herbivores;
  * @project JavaRush_Module-2
  */
 
+import Core.Settings;
 import Fauna.Animal;
 import Fauna.Herbivor;
 import Fauna.Herbivorc;
 
 public class Kangoroo extends Herbivorc implements Herbivor {
 
-    private static int maxOnCell = 149;
+    private static int maxOnCell = Settings.kangorooMaxOnCell;
 
     public Kangoroo() {
         super(47, 2, 7, 8);
