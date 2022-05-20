@@ -249,16 +249,15 @@ public class Cell {
     }
 
     public void tryToEatPredators(){
-
+        for (Animal predator : predators) {
+            predator.eatAnimal(herbivors);
+        }
     }
 
     public void tryToEatHerbivores() {
         for (Animal herbivor : herbivors) {
-            herbivor.eat(herbs);
+            herbivor.eatHebrbs(herbs);
         }
-//        for (int i = 0; i < 10;i++) {
-//            removeHerb();
-//        }
     }
 
 }

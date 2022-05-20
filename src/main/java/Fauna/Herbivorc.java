@@ -15,21 +15,29 @@ public class Herbivorc extends Animal {
 
     @Override
     public void eat() {}
+
     @Override
-    public void eat(List<Herb> herbs) {
+    public void eatHebrbs(List<?> listOfFood) {
         if (this.getSatiety() < this.getMaxSatiety()) {
             double diff = this.getMaxSatiety() - this.getSatiety();
-            if (herbs.size() > diff) {
+            if (listOfFood.size() > diff) {
 //                for (int i = 0; i < diff; i++) {
 //                    herbs.remove(i);
 //                }
                 this.setSatiety(this.getMaxSatiety());
                 this.setStarvingTime(this.getMaxStarvingTime());
-                herbs.subList(0, (int)diff).clear();
+                listOfFood.subList(0, (int)diff).clear();
             }
             //System.out.println("Травоядное ест травы - " + diff + getClass());
         }
     }
+
+
+    @Override
+    public void eatAnimal(List<Animal> herbs) {
+
+    }
+
 
     @Override
     public void reproduction() {

@@ -20,7 +20,12 @@ public class Predatorc extends Animal {
     }
 
     @Override
-    public void eat(List<Herb> herbs) {
+    public void eatHebrbs(List<?> herbs) {
+
+    }
+
+    @Override
+    public void eatAnimal(List<Animal> herbs) {
 
     }
 

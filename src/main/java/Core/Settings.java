@@ -25,5 +25,5 @@ public class Settings {
     public static int duckMaxOnCell = 200;
     public static int caterpillarMaxOnCell = 1000;
     //Растения
-    public static int herbsMaxOnCell = 200;
+    public static int herbsMaxOnCell = 10000;
 }

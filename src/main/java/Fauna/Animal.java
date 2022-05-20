@@ -39,7 +39,8 @@ public abstract class Animal {
 
     public abstract void eat();
 
-    public abstract void eat(List<Herb> herbs);
+    public abstract void eatHebrbs(List<?> herbs);
+    public abstract void eatAnimal(List<Animal> herbs);
 
     public abstract void reproduction();
 

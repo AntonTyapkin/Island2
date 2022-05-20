@@ -19,12 +19,12 @@ public class SimulateLife implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("СИМУЛЯЦИЯ ЖИЗНИ ПРОХОД " + this.iterSimulate + ".");
+        //System.out.println("СИМУЛЯЦИЯ ЖИЗНИ ПРОХОД " + this.iterSimulate + ".");
         for (int i = 0; i < objects.length; i++) {
             for (int j = 0; j < objects[i].length; j++) {
-                System.out.println("Уменьшаю сытость");
+                //System.out.println("Уменьшаю сытость");
                 objects[i][j].decreaseSatiety();
-                System.out.println("Пробую есть");
+                //jSystem.out.println("Пробую есть");
                 tryToEat(objects[i][j]);
                 //tryToReproduction(objects[i][j]);
             }
@@ -39,7 +39,7 @@ public class SimulateLife implements Runnable {
 
     //TO DO
     public synchronized void tryToEat(Cell cell) {
-       // cell.tryToEatPredators();
+        //cell.tryToEatPredators();
         cell.tryToEatHerbivores();
     }
     public void tryToMove() {}
