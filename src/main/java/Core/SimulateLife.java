@@ -19,30 +19,37 @@ public class SimulateLife implements Runnable {
 
     @Override
     public void run() {
-        //System.out.println("СИМУЛЯЦИЯ ЖИЗНИ ПРОХОД " + this.iterSimulate + ".");
+        System.out.println("СИМУЛЯЦИЯ ЖИЗНИ ПРОХОД " + this.iterSimulate + ".");
         for (int i = 0; i < objects.length; i++) {
             for (int j = 0; j < objects[i].length; j++) {
-                //System.out.println("Уменьшаю сытость");
-                objects[i][j].decreaseSatiety();
-                //jSystem.out.println("Пробую есть");
+                //уменьшаем сытость
+                tryDecreaseSatiety(objects[i][j]);
+                //едим
                 tryToEat(objects[i][j]);
-                //tryToReproduction(objects[i][j]);
+                //перемещаемся
+                tryToMove(objects[i][j], i, j);
+                //плодимся
+                tryToReproduction(objects[i][j]);
             }
         }
         this.iterSimulate++;
     }
 
-
+    public void tryDecreaseSatiety(Cell cell) {
+        cell.decreaseSatiety();
+    }
     public void tryToReproduction(Cell cell) {
         cell.tryToReproductionPredators();
+        cell.tryToReproductionHerbivores();
     }
 
     //TO DO
     public synchronized void tryToEat(Cell cell) {
-        //cell.tryToEatPredators();
-        cell.tryToEatHerbivores();
+        cell.tryToEat();
     }
-    public void tryToMove() {}
+    public void tryToMove(Cell cell, int positionY, int positionX) {
+        cell.tryToMove(positionY, positionX);
+    }
 
 
 }

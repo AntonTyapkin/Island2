@@ -6,13 +6,14 @@ package Island;
  * @project JavaRush_Module-2
  */
 
-import Core.ScanClasses;
-import Core.Settings;
+import Core.*;
 import Fauna.Animal;
 import Fauna.Herb;
 import Fauna.Herbivor;
 import Fauna.Herbivores.*;
+import Fauna.Predator;
 import Fauna.Predators.*;
+import com.sun.tools.javac.Main;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -23,59 +24,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Cell {
-    private final List<Animal> predators = new CopyOnWriteArrayList<>();
-    //private final List<Animal> predators = Collections.synchronizedList(new ArrayList<>());
-    private final List<Animal> herbivors = new CopyOnWriteArrayList<>();
-    //private final List<Animal> herbivors = Collections.synchronizedList(new ArrayList<>());
-    private final List<Herb> herbs = new CopyOnWriteArrayList<>();
-    //private final List<Herb> herbs = Collections.synchronizedList(new ArrayList<>());
+
+    GeneratorFauna generatorFauna = new GeneratorFauna();
+    FaunaMovement faunaMovement = new FaunaMovement();
     Set<Class> predatorsClasses = ScanClasses.getPredatorsClasses();
     Set<Class> herbivoresClasses = ScanClasses.getHerbivoresClasses();
 
+    private final List<Animal> predators = generatorFauna.generateFauna(predatorsClasses);
+    //private final List<Animal> predators = Collections.synchronizedList(new ArrayList<>());
+    private final List<Animal> herbivors = generatorFauna.generateFauna(herbivoresClasses);
+    //private final List<Animal> herbivors = Collections.synchronizedList(new ArrayList<>());
+    private final List<Herb> herbs = new CopyOnWriteArrayList<>();
+    //private final List<Herb> herbs = Collections.synchronizedList(new ArrayList<>());
+
     public Cell() {
-        generatePredators();
-        generateHerbivores();
         generateHerbs();
-    }
-
-    private void generatePredators() {
-        for (Class c : predatorsClasses) {
-            try {
-                Field maxOnCellField = c.getDeclaredField("maxOnCell");
-                maxOnCellField.setAccessible(true);
-                int maxOnCell = (int) maxOnCellField.get(null);
-                int count = 1 + (int) (Math.random() * ((maxOnCell - 1)));
-                Constructor<Animal> constr = c.getConstructor();
-                for (int k = 0; k <= count; k++) {
-                    Animal animal = constr.newInstance();
-                    predators.add(animal);
-                }
-            } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException |
-                     InstantiationException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    private void generateHerbivores() {
-        for (Class c : herbivoresClasses) {
-            try {
-                Field maxOnCellField = c.getDeclaredField("maxOnCell");
-                maxOnCellField.setAccessible(true);
-                int maxOnCell = (int) maxOnCellField.get(null);
-                int count = 1 + (int) (Math.random() * ((maxOnCell - 1)));
-                Constructor<Animal> constr = c.getConstructor();
-                for (int k = 0; k <= count; k++) {
-                    Animal animal = constr.newInstance();
-                    herbivors.add(animal);
-                }
-            } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException |
-                     InstantiationException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     private void generateHerbs() {
@@ -98,6 +64,16 @@ public class Cell {
             for (int i = 0; i < getIntCalculate; i++) {
                 this.herbs.add(new Herb());
             }
+        }
+    }
+
+    public void addAnimal(Animal animal) {
+        if (animal instanceof Predator) {
+            predators.add(animal);
+        } else if (animal instanceof Herbivor){
+            herbivors.add(animal);
+        } else {
+            System.out.println("Ошибка в addAnimal!");
         }
     }
 
@@ -196,39 +172,10 @@ public class Cell {
     }
 
     public void tryToReproductionPredators() {
-        int wolf = 0;
-        int snake = 0;
-        int fox = 0;
-        int bear = 0;
-        int eagle = 0;
-        for (Animal predator : predators) {
-            if (predator.getClass().equals(Wolf.class)) {
-                wolf++;
-            } else if (predator.getClass().equals(Snake.class)) {
-                snake++;
-            } else if (predator.getClass().equals(Fox.class)) {
-                fox++;
-            } else if (predator.getClass().equals(Bear.class)) {
-                bear++;
-            } else if (predator.getClass().equals(Eagle.class)) {
-                eagle++;
-            }
-        }
-        if (wolf < Wolf.getMaxOnCell()) {
-            predators.add(new Wolf());
-        }
-        if (snake % 2 == 0 && snake < Snake.getMaxOnCell()) {
-            predators.add(new Snake());
-        }
-        if (fox % 2 == 0 && fox < Fox.getMaxOnCell()) {
-            predators.add(new Fox());
-        }
-        if (bear % 2 == 0 && bear < Bear.getMaxOnCell()) {
-            predators.add(new Bear());
-        }
-        if (eagle % 2 == 0 && eagle < Eagle.getMaxOnCell()) {
-            predators.add(new Eagle());
-        }
+        generatorFauna.reproductionFauna(predatorsClasses, predators);
+    }
+    public void tryToReproductionHerbivores() {
+        generatorFauna.reproductionFauna(herbivoresClasses, herbivors);
     }
 
     public void decreaseSatiety() {
@@ -248,16 +195,24 @@ public class Cell {
         }
     }
 
-    public void tryToEatPredators(){
+    public void tryToEat(){
         for (Animal predator : predators) {
-            predator.eatAnimal(herbivors);
+            predator.eat(herbivors);
+        }
+        for (Animal herbivor : herbivors) {
+            herbivor.eat(herbs);
         }
     }
 
-    public void tryToEatHerbivores() {
-        for (Animal herbivor : herbivors) {
-            herbivor.eatHebrbs(herbs);
-        }
+    public void tryToMove(int positionY, int positionX) {
+
+        Cell[][] island = Island.getStaticIsland();
+        //System.out.println("done");
+        faunaMovement.movingFaunaInCells(predators, island, positionY, positionX);
+        //System.out.println("done - Predators");
+        faunaMovement.movingFaunaInCells(herbivors, island, positionY, positionX);
+        //System.out.println("done - Herbivores");
+
     }
 
 }

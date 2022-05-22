@@ -6,6 +6,7 @@ package Fauna.Predators;
  * @project JavaRush_Module-2
  */
 
+import Core.MovementDirection;
 import Core.Settings;
 import Fauna.Animal;
 import Fauna.Predator;
@@ -20,17 +21,7 @@ public class Wolf extends Predatorc implements Predator{
     }
 
     @Override
-    public void eat() {
-        System.out.println("Волк пытается поесть");
-    }
-
-    @Override
     public void reproduction() {
-
-    }
-
-    @Override
-    public void setDirection() {
 
     }
 

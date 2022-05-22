@@ -1,5 +1,6 @@
 package Fauna;
 
+import Core.MovementDirection;
 import Fauna.Predators.Wolf;
 
 import java.util.List;
@@ -37,14 +38,11 @@ public abstract class Animal {
         return this.gender;
     }
 
-    public abstract void eat();
-
-    public abstract void eatHebrbs(List<?> herbs);
-    public abstract void eatAnimal(List<Animal> herbs);
+    public abstract void eat(List<?> listOfFood);
 
     public abstract void reproduction();
 
-    public abstract void setDirection();
+    public abstract MovementDirection setDirection();
 
     public double getSatiety() {
         return satiety;
@@ -77,5 +75,9 @@ public abstract class Animal {
     }
     public int getMaxStarvingTime() {
         return maxStarvingTime;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 }
