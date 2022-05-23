@@ -15,7 +15,7 @@ public class Caterpillar extends HerbivoreClass implements Herbivor {
     private static int maxOnCell = Settings.caterpillarMaxOnCell;
 
     public Caterpillar() {
-        super(0.01, 1, 0.0025, 1);
+        super(0.01, 1, 0.0025, 2);
     }
 
     public static int getMaxOnCell() {

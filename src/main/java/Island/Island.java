@@ -1,5 +1,7 @@
 package Island;
 
+import Core.Settings;
+
 /**
  * @author Nikolay Gabaraev
  * @created 21.05.2022
@@ -8,7 +10,7 @@ package Island;
 
 public class Island {
 
-    private static final Cell[][] island = new Cell[10][10];
+    private static final Cell[][] island = new Cell[Settings.maxY][Settings.maxX];
 
     public Island() {
         for (int i = 0; i < island.length; i++) {

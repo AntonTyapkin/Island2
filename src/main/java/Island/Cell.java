@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class Cell {
     //Объект генерирующий фауну
@@ -77,25 +78,12 @@ public class Cell {
     }
 
     public String countEachPredator() {
-        int wolf = 0;
-        int snake = 0;
-        int fox = 0;
-        int bear = 0;
-        int eagle = 0;
         StringBuilder st = new StringBuilder();
-        for (Animal predator : predators) {
-            if (predator.getClass().equals(Wolf.class)) {
-                wolf++;
-            } else if (predator.getClass().equals(Snake.class)) {
-                snake++;
-            } else if (predator.getClass().equals(Fox.class)) {
-                fox++;
-            } else if (predator.getClass().equals(Bear.class)) {
-                bear++;
-            } else if (predator.getClass().equals(Eagle.class)) {
-                eagle++;
-            }
-        }
+        int wolf = predators.stream().filter(entity -> entity instanceof Wolf).toList().size();
+        int snake = predators.stream().filter(entity -> entity instanceof Snake).toList().size();
+        int fox = predators.stream().filter(entity -> entity instanceof Fox).toList().size();
+        int bear = predators.stream().filter(entity -> entity instanceof Bear).toList().size();
+        int eagle = predators.stream().filter(entity -> entity instanceof Eagle).toList().size();
         st.append("Волков:").append(wolf)
                 .append(" Змей: ").append(snake)
                 .append(" Лис:").append(fox)
@@ -106,51 +94,27 @@ public class Cell {
     }
 
     public String countEachHerbivore() {
-        int horse = 0;
-        int deer = 0;
-        int rabbit = 0;
-        int hamster = 0;
-        int goat = 0;
-        int sheep = 0;
-        int kangoroo = 0;
-        int cow = 0;
-        int duck = 0;
-        int caterpillar = 0;
+        int horse = herbivors.stream().filter(entity -> entity instanceof Horse).toList().size();
+        int deer = herbivors.stream().filter(entity -> entity instanceof Deer).toList().size();
+        int rabbit = herbivors.stream().filter(entity -> entity instanceof Rabbit).toList().size();
+        int hamster = herbivors.stream().filter(entity -> entity instanceof Hamster).toList().size();
+        int goat = herbivors.stream().filter(entity -> entity instanceof Goat).toList().size();
+        int sheep = herbivors.stream().filter(entity -> entity instanceof Sheep).toList().size();
+        int boar = herbivors.stream().filter(entity -> entity instanceof Boar).toList().size();
+        int cow = herbivors.stream().filter(entity -> entity instanceof Cow).toList().size();
+        int duck = herbivors.stream().filter(entity -> entity instanceof Duck).toList().size();
+        int caterpillar = herbivors.stream().filter(entity -> entity instanceof Caterpillar).toList().size();
         StringBuilder st = new StringBuilder();
-        for (Animal herbivor : herbivors) {
-            if (herbivor.getClass().equals(Horse.class)) {
-                horse++;
-            } else if (herbivor.getClass().equals(Deer.class)) {
-                deer++;
-            } else if (herbivor.getClass().equals(Rabbit.class)) {
-                rabbit++;
-            } else if (herbivor.getClass().equals(Hamster.class)) {
-                hamster++;
-            } else if (herbivor.getClass().equals(Goat.class)) {
-                goat++;
-            } else if (herbivor.getClass().equals(Sheep.class)) {
-                sheep++;
-            } else if (herbivor.getClass().equals(Boar.class)) {
-                kangoroo++;
-            } else if (herbivor.getClass().equals(Cow.class)) {
-                cow++;
-            } else if (herbivor.getClass().equals(Duck.class)) {
-                duck++;
-            } else if (herbivor.getClass().equals(Caterpillar.class)) {
-                caterpillar++;
-            }
-        }
         st.append("Лошадей:").append(horse)
                 .append(" Оленей: ").append(deer)
                 .append(" Зайцев:").append(rabbit)
                 .append(" Хоямков:").append(hamster)
                 .append(" Коз:").append(goat)
                 .append(" Овец:").append(sheep)
-                .append(" Кенгуру:").append(kangoroo)
+                .append(" Кабанов:").append(boar)
                 .append(" Коров:").append(cow)
                 .append(" Уток:").append(duck)
                 .append(" Гучениц:").append(caterpillar);
-
         return String.valueOf(st);
     }
 
@@ -176,12 +140,17 @@ public class Cell {
     }
 
     public void tryToEat(){
-        for (Animal predator : predators) {
-            predator.eat(herbivors, predators);
+        try {
+            for (Animal predator : predators) {
+                predator.eat(herbivors, predators);
+            }
+            for (Animal herbivore : herbivors) {
+                herbivore.eat(herbs,herbivors);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        for (Animal herbivore : herbivors) {
-            herbivore.eat(herbs,herbivors);
-        }
+
     }
 
     public void tryToMove(int positionY, int positionX) {

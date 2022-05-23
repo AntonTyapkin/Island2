@@ -54,6 +54,10 @@ public class Settings {
         eagleMap.put("Hamster",90);
         eagleMap.put("Duck",80);
     }
+
+    //Размеры острова
+    public static int maxY = 3;
+    public static int maxX = 3;
     //Максимальное кол-во зверей в клетках
     //Хищники
     public static int wolfMaxOnCell = 30;
