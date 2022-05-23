@@ -38,18 +38,17 @@ public class SimulateLife implements Runnable {
     public void tryDecreaseSatiety(Cell cell) {
         cell.decreaseSatiety();
     }
+
     public void tryToReproduction(Cell cell) {
-        cell.tryToReproductionPredators();
-        cell.tryToReproductionHerbivores();
+        cell.tryToReproduction();
     }
 
-    //TO DO
     public synchronized void tryToEat(Cell cell) {
         cell.tryToEat();
     }
+
     public void tryToMove(Cell cell, int positionY, int positionX) {
         cell.tryToMove(positionY, positionX);
     }
-
 
 }

@@ -10,8 +10,8 @@ import Island.Cell;
 
 public class PrintStatictic implements Runnable {
 
-    private int iter;
-    private Cell[][] objects;
+    private int iterPrintStatic;
+    private final Cell[][] objects;
 
     public PrintStatictic(Cell[][] objects) {
         this.objects = objects;
@@ -19,10 +19,10 @@ public class PrintStatictic implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Итерация - " + this.iter + ". Печатаю статистку");
+        System.out.println("Итерация - " + this.iterPrintStatic + ". Печатаю статистку");
         addHerbs(objects);
         printStat(objects);
-        this.iter++;
+        this.iterPrintStatic++;
     }
 
     public static void printStat(Cell[][] objects) {
@@ -32,7 +32,7 @@ public class PrintStatictic implements Runnable {
                 System.out.println(" Растений - " + objects[i][j].countHerbs()
                         + " Хищников - " + objects[i][j].countPredators() + " Травоядных - " + objects[i][j].countHerbivores() + "\n"
                         + objects[i][j].countEachPredator() + "\n"
-                        + objects[i][j].countEachHerbivor());
+                        + objects[i][j].countEachHerbivore());
             }
         }
         System.out.println("------------------");

@@ -8,9 +8,9 @@ package Fauna.Herbivores;
 
 import Core.Settings;
 import Fauna.Herbivor;
-import Fauna.Herbivorc;
+import Fauna.HerbivoreClass;
 
-public class Caterpillar extends Herbivorc implements Herbivor {
+public class Caterpillar extends HerbivoreClass implements Herbivor {
 
     private static int maxOnCell = Settings.caterpillarMaxOnCell;
 

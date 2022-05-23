@@ -7,11 +7,10 @@ package Fauna.Predators;
  */
 
 import Core.Settings;
-import Fauna.Animal;
 import Fauna.Predator;
-import Fauna.Predatorc;
+import Fauna.PredatorClass;
 
-public class Snake extends Predatorc implements Predator {
+public class Snake extends PredatorClass implements Predator {
 
     private static int maxOnCell = Settings.snakeMaxOnCell;
 

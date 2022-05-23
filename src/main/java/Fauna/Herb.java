@@ -7,8 +7,6 @@ package Fauna;
 
 import Core.Settings;
 
-import java.util.Objects;
-
 public class Herb {
     private double weigh;
     private static int maxOnCell = Settings.herbsMaxOnCell;
@@ -17,24 +15,8 @@ public class Herb {
         this.weigh = 1;
     }
 
-    public double getWeigh() {
-        return weigh;
-    }
-
     public static int getMaxOnCell() {
         return maxOnCell;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Herb herb = (Herb) o;
-        return Double.compare(herb.weigh, weigh) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(weigh);
-    }
 }

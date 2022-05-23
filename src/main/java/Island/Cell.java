@@ -13,23 +13,18 @@ import Fauna.Herbivor;
 import Fauna.Herbivores.*;
 import Fauna.Predator;
 import Fauna.Predators.*;
-import com.sun.tools.javac.Main;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Cell {
-
+    //Объект генерирующий фауну
     GeneratorFauna generatorFauna = new GeneratorFauna();
+    //Объект отвечающий за передвижения
     FaunaMovement faunaMovement = new FaunaMovement();
+    //Сеты с классами из пакетов Fauna.Herbivores и Fauna.Predators
     Set<Class> predatorsClasses = ScanClasses.getPredatorsClasses();
     Set<Class> herbivoresClasses = ScanClasses.getHerbivoresClasses();
 
@@ -45,22 +40,16 @@ public class Cell {
     }
 
     private void generateHerbs() {
-        int countCreate = 1 + (int) (Math.random() * ((Herb.getMaxOnCell() - 1)));
+        int countCreate = ThreadLocalRandom.current().nextInt(1, Herb.getMaxOnCell());
         for (int k = 0; k <= countCreate; k++) {
             herbs.add(new Herb());
         }
     }
 
-    public Animal getPredator() {
-        int randomIndex = 1 + (int) (Math.random() * ((predators.size() - 1)));
-        return predators.get(randomIndex);
-    }
-
     public void addHerb() {
-
         if (this.herbs.size() < Settings.herbsMaxOnCell) {
             int diff = Settings.herbsMaxOnCell - this.herbs.size();
-            int getIntCalculate = 1 + (int) (Math.random() * ((diff - 1)));
+            int getIntCalculate = ThreadLocalRandom.current().nextInt(1, diff);
             for (int i = 0; i < getIntCalculate; i++) {
                 this.herbs.add(new Herb());
             }
@@ -72,13 +61,7 @@ public class Cell {
             predators.add(animal);
         } else if (animal instanceof Herbivor){
             herbivors.add(animal);
-        } else {
-            System.out.println("Ошибка в addAnimal!");
         }
-    }
-
-    public void removeHerb() {
-        this.herbs.remove(0);
     }
 
     public long countHerbs() {
@@ -122,7 +105,7 @@ public class Cell {
         return String.valueOf(st);
     }
 
-    public String countEachHerbivor() {
+    public String countEachHerbivore() {
         int horse = 0;
         int deer = 0;
         int rabbit = 0;
@@ -171,13 +154,10 @@ public class Cell {
         return String.valueOf(st);
     }
 
-    public void tryToReproductionPredators() {
+    public void tryToReproduction() {
         generatorFauna.reproductionFauna(predatorsClasses, predators);
-    }
-    public void tryToReproductionHerbivores() {
         generatorFauna.reproductionFauna(herbivoresClasses, herbivors);
     }
-
     public void decreaseSatiety() {
         for (Animal predator : predators) {
             if (predator.getStarvingTime() <= 0) {
@@ -186,11 +166,11 @@ public class Cell {
                 predator.decreaseSatiety();
             }
         }
-        for (Animal herbivor : herbivors) {
-            if (herbivor.getStarvingTime() <= 0) {
-                herbivors.remove(herbivor);
+        for (Animal herbivore : herbivors) {
+            if (herbivore.getStarvingTime() <= 0) {
+                herbivors.remove(herbivore);
             } else {
-                herbivor.decreaseSatiety();
+                herbivore.decreaseSatiety();
             }
         }
     }
@@ -199,20 +179,15 @@ public class Cell {
         for (Animal predator : predators) {
             predator.eat(herbivors);
         }
-        for (Animal herbivor : herbivors) {
-            herbivor.eat(herbs);
+        for (Animal herbivore : herbivors) {
+            herbivore.eat(herbs);
         }
     }
 
     public void tryToMove(int positionY, int positionX) {
-
         Cell[][] island = Island.getStaticIsland();
-        //System.out.println("done");
         faunaMovement.movingFaunaInCells(predators, island, positionY, positionX);
-        //System.out.println("done - Predators");
         faunaMovement.movingFaunaInCells(herbivors, island, positionY, positionX);
-        //System.out.println("done - Herbivores");
-
     }
 
 }

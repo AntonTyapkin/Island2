@@ -7,11 +7,10 @@ package Fauna.Herbivores;
  */
 
 import Core.Settings;
-import Fauna.Animal;
 import Fauna.Herbivor;
-import Fauna.Herbivorc;
+import Fauna.HerbivoreClass;
 
-public class Sheep extends Herbivorc implements Herbivor {
+public class Sheep extends HerbivoreClass implements Herbivor {
 
     private static int maxOnCell = Settings.sheepMaxOnCell;
 

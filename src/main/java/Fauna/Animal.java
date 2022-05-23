@@ -30,40 +30,46 @@ public abstract class Animal {
         setGender();
     }
 
+    public abstract void eat(List<?> listOfFood);
+
+    public MovementDirection setDirection(){
+        MovementDirection movementDirection;
+
+        int moveDirection = ThreadLocalRandom.current().nextInt(0, 4);
+
+        if (moveDirection == MovementDirection.UP.ordinal()) {
+            movementDirection = MovementDirection.UP;
+        } else if (moveDirection == MovementDirection.RIGHT.ordinal()) {
+            movementDirection = MovementDirection.RIGHT;
+        } else if (moveDirection == MovementDirection.DOWN.ordinal()) {
+            movementDirection = MovementDirection.DOWN;
+        } else if (moveDirection == MovementDirection.LEFT.ordinal()) {
+            movementDirection = MovementDirection.LEFT;
+        } else {
+            movementDirection = null;
+        }
+
+        return movementDirection;
+    }
+
     private void setGender() {
         this.gender = (int) (Math.random() * 2 + 1);
+    }
+
+    public void setSatiety(double satiety) {
+        this.satiety = satiety;
+    }
+
+    public void setStarvingTime(int starvingTime) {
+        this.starvingTime = starvingTime;
     }
 
     public int getGender() {
         return this.gender;
     }
 
-    public abstract void eat(List<?> listOfFood);
-
-    public abstract void reproduction();
-
-    public abstract MovementDirection setDirection();
-
     public double getSatiety() {
         return satiety;
-    }
-    public void setSatiety(double satiety) {
-        this.satiety = satiety;
-    }
-    public void setStarvingTime(int starvingTime) {
-        this.starvingTime = starvingTime;
-    }
-
-    public void decreaseSatiety() {
-        if(this.satiety <= 0) {
-            this.starvingTime--;
-        } else {
-            //double rand = ThreadLocalRandom.current().nextDouble(1, this.getMaxSatiety());
-            //System.out.println(rand);
-            int rand = 1 + (int) (Math.random() * ((this.maxSatiety - 1)));
-            this.satiety = this.satiety - rand;
-            //System.out.println(this.satiety + " " + this.starvingTime + " " + getClass());
-        }
     }
 
     public int getStarvingTime() {
@@ -73,6 +79,7 @@ public abstract class Animal {
     public double getMaxSatiety() {
         return maxSatiety;
     }
+
     public int getMaxStarvingTime() {
         return maxStarvingTime;
     }
@@ -80,4 +87,22 @@ public abstract class Animal {
     public int getSpeed() {
         return speed;
     }
+
+    public void decreaseSatiety() {
+        if(this.satiety <= 0) {
+            this.starvingTime--;
+        } else {
+            int rand = 1 + (int) (Math.random() * ((this.maxSatiety - 1)));
+            this.satiety = this.satiety - rand;
+        }
+    }
+
+    public boolean reproduction() {
+        boolean canReproduction = false;
+        if (this.satiety == this.maxSatiety) {
+            canReproduction = true;
+        }
+        return canReproduction;
+    }
+
 }

@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
  */
 public class ScanClasses {
 
+    //Класс для сканирования пакетов Herbivores и Predators, что бы получить списки классов для дальнейшей генерации
+    //Используется google.guava 31-1. Смотри pom.xml
     private static Set<Class> predatorsClasses;
     private static Set<Class> herbivoresClasses;
 
@@ -28,6 +30,7 @@ public class ScanClasses {
         }
     }
 
+    //Да, это копипаста с baeldung.com
     public static Set<Class> findAllClassesUsingGoogleGuice(String packageName) throws IOException {
         return ClassPath.from(ClassLoader.getSystemClassLoader())
                 .getAllClasses()
