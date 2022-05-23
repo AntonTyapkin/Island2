@@ -12,7 +12,7 @@ import Island.Island;
 import java.util.concurrent.*;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         //инициализируем класс с настройками, что бы сработал блок инициализации
         Settings settings = new Settings();
         //Генерируем карту

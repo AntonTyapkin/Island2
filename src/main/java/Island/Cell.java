@@ -60,7 +60,7 @@ public class Cell {
     public void addAnimal(Animal animal) {
         if (animal instanceof Predator) {
             predators.add(animal);
-        } else if (animal instanceof Herbivor){
+        } else if (animal instanceof Herbivor) {
             herbivors.add(animal);
         }
     }
@@ -122,6 +122,7 @@ public class Cell {
         generatorFauna.reproductionFauna(predatorsClasses, predators);
         generatorFauna.reproductionFauna(herbivoresClasses, herbivors);
     }
+
     public void decreaseSatiety() {
         for (Animal predator : predators) {
             if (predator.getStarvingTime() <= 0) {
@@ -139,13 +140,13 @@ public class Cell {
         }
     }
 
-    public void tryToEat(){
+    public void tryToEat() {
         try {
             for (Animal predator : predators) {
                 predator.eat(herbivors, predators);
             }
             for (Animal herbivore : herbivors) {
-                herbivore.eat(herbs,herbivors);
+                herbivore.eat(herbs, herbivors);
             }
         } catch (Exception e) {
             e.printStackTrace();

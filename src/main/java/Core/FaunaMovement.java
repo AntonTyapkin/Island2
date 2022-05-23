@@ -52,7 +52,7 @@ public class FaunaMovement {
                 //Получаем направление для движения от объекта животного
                 MovementDirection movementDirection = animal.setDirection();
                 try {
-                    if ( movementDirection.equals(MovementDirection.UP)) {
+                    if (movementDirection.equals(MovementDirection.UP)) {
                         //Проверим - можно ли пойти по указанному направлению
                         if ((positionY - animalMove) >= MIN_Y) {
                             //Проверим не будет ли переселения. Если будет - получаем false и пропускаем ход. Далее по аналогии
@@ -97,7 +97,7 @@ public class FaunaMovement {
         int animalInCell = 0;
         if (animal instanceof Predator) {
             animalInCell = (int) island[positionY][positionX].countPredators();
-        } else if (animal instanceof Herbivor){
+        } else if (animal instanceof Herbivor) {
             animalInCell = (int) island[positionY][positionX].countHerbivores();
         }
 

@@ -26,7 +26,7 @@ public class PrintStatictic implements Runnable {
     }
 
     public static void printStat(Cell[][] objects) {
-        try{
+        try {
             for (int i = 0; i < objects.length; i++) {
                 for (int j = 0; j < objects[i].length; j++) {
                     System.out.print("Ячейка - " + i + "x" + j);

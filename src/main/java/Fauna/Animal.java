@@ -33,7 +33,7 @@ public abstract class Animal {
     //костыль, что бы можно было выбрать рацион
     public abstract void eat(List<?> listOfFood, List<?> listOfFood1);
 
-    public MovementDirection setDirection(){
+    public MovementDirection setDirection() {
         MovementDirection movementDirection;
 
         int moveDirection = ThreadLocalRandom.current().nextInt(0, 4);
@@ -90,7 +90,7 @@ public abstract class Animal {
     }
 
     public void decreaseSatiety() {
-        if(this.satiety <= 0) {
+        if (this.satiety <= 0) {
             this.starvingTime--;
         } else {
             int rand = 1 + (int) (Math.random() * ((this.maxSatiety - 1)));

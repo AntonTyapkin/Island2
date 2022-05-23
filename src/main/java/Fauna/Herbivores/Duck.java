@@ -36,7 +36,7 @@ public class Duck extends HerbivoreClass implements Herbivor {
                     if (listOfFood.size() > diff) {
                         this.setSatiety(this.getMaxSatiety());
                         this.setStarvingTime(this.getMaxStarvingTime());
-                        listOfFood.subList(0, (int)diff).clear();
+                        listOfFood.subList(0, (int) diff).clear();
                     }
                 } else {
                     for (Object predator : listOfFood1) {

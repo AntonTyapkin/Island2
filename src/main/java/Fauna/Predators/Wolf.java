@@ -10,7 +10,7 @@ import Core.Settings;
 import Fauna.Predator;
 import Fauna.PredatorClass;
 
-public class Wolf extends PredatorClass implements Predator{
+public class Wolf extends PredatorClass implements Predator {
 
     private static int maxOnCell = Settings.wolfMaxOnCell;
 

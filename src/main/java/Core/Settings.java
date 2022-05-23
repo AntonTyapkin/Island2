@@ -18,41 +18,41 @@ public class Settings {
 
     static {
 
-        wolfMap.put("Horse",10);
-        wolfMap.put("Deer",15);
-        wolfMap.put("Rabbit",60);
-        wolfMap.put("Hamster",80);
-        wolfMap.put("Goat",60);
-        wolfMap.put("Sheep",70);
-        wolfMap.put("Boar",15);
-        wolfMap.put("Cow",10);
-        wolfMap.put("Duck",40);
+        wolfMap.put("Horse", 10);
+        wolfMap.put("Deer", 15);
+        wolfMap.put("Rabbit", 60);
+        wolfMap.put("Hamster", 80);
+        wolfMap.put("Goat", 60);
+        wolfMap.put("Sheep", 70);
+        wolfMap.put("Boar", 15);
+        wolfMap.put("Cow", 10);
+        wolfMap.put("Duck", 40);
 
         snakeMap.put("Fox", 15);
-        snakeMap.put("Rabbit",20);
-        snakeMap.put("Hamster",40);
-        snakeMap.put("Duck",10);
+        snakeMap.put("Rabbit", 20);
+        snakeMap.put("Hamster", 40);
+        snakeMap.put("Duck", 10);
 
-        foxMap.put("Rabbit",70);
-        foxMap.put("Hamster",90);
-        foxMap.put("Duck",40);
-        foxMap.put("Caterpillar",40);
+        foxMap.put("Rabbit", 70);
+        foxMap.put("Hamster", 90);
+        foxMap.put("Duck", 40);
+        foxMap.put("Caterpillar", 40);
 
-        bearMap.put("Snake",80);
-        bearMap.put("Horse",40);
-        bearMap.put("Deer",80);
-        bearMap.put("Rabbit",80);
-        bearMap.put("Hamster",90);
-        bearMap.put("Goat",70);
-        bearMap.put("Sheep",70);
-        bearMap.put("Boar",50);
-        bearMap.put("Cow",20);
-        bearMap.put("Duck",10);
+        bearMap.put("Snake", 80);
+        bearMap.put("Horse", 40);
+        bearMap.put("Deer", 80);
+        bearMap.put("Rabbit", 80);
+        bearMap.put("Hamster", 90);
+        bearMap.put("Goat", 70);
+        bearMap.put("Sheep", 70);
+        bearMap.put("Boar", 50);
+        bearMap.put("Cow", 20);
+        bearMap.put("Duck", 10);
 
-        eagleMap.put("Fox",10);
-        eagleMap.put("Rabbit",90);
-        eagleMap.put("Hamster",90);
-        eagleMap.put("Duck",80);
+        eagleMap.put("Fox", 10);
+        eagleMap.put("Rabbit", 90);
+        eagleMap.put("Hamster", 90);
+        eagleMap.put("Duck", 80);
     }
 
     //Размеры острова

@@ -19,7 +19,6 @@ public class SimulateLife implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("СИМУЛЯЦИЯ ЖИЗНИ ПРОХОД " + this.iterSimulate + ".");
         for (int i = 0; i < objects.length; i++) {
             for (int j = 0; j < objects[i].length; j++) {
                 //уменьшаем сытость

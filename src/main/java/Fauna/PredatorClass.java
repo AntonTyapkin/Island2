@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * @created 14.05.2022
  * @project JavaRush_Module-2
  */
-public class PredatorClass extends Animal implements Predator{
+public class PredatorClass extends Animal implements Predator {
 
     public PredatorClass(double weight, int speed, double satiety, int starvingTime) {
         super(weight, speed, satiety, starvingTime);
@@ -23,7 +23,7 @@ public class PredatorClass extends Animal implements Predator{
         try {
             //Получаем число, на основании которого выберем жертву охоты
             int eatChance = ThreadLocalRandom.current().nextInt(0, 100);
-            Map<String,Integer> mapOfChanceHunt = null;
+            Map<String, Integer> mapOfChanceHunt = null;
             List<String> listOfHunts = null;
             String animalToEat;
             int listOfHuntsId;
@@ -72,7 +72,7 @@ public class PredatorClass extends Animal implements Predator{
                     }
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

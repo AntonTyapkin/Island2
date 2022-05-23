@@ -36,9 +36,9 @@ public class Boar extends HerbivoreClass implements Herbivor {
                     if (listOfFood.size() > diff) {
                         this.setSatiety(this.getMaxSatiety());
                         this.setStarvingTime(this.getMaxStarvingTime());
-                        listOfFood.subList(0, (int)diff).clear();
+                        listOfFood.subList(0, (int) diff).clear();
                     }
-                } else if (eatChance > 10 && eatChance < 50){
+                } else if (eatChance > 10 && eatChance < 50) {
                     for (Object predator : listOfFood1) {
                         Animal predator1 = (Animal) predator;
                         if (predator1.getClass().getSimpleName().equals("Hamster")) {

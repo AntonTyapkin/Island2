@@ -70,7 +70,7 @@ public class GeneratorFauna {
                 if (male >= female && female > 0) {
                     childCount = female;
                 }
-                if (female >= male && male > 0){
+                if (female >= male && male > 0) {
                     childCount = male;
                 }
                 if (childCount != 0) {
@@ -78,7 +78,7 @@ public class GeneratorFauna {
                         //Та же самая схема что и в generateFauna()
                         Field maxOnCellField = c.getDeclaredField("maxOnCell");
                         maxOnCellField.setAccessible(true);
-                        int count =(int) maxOnCellField.get(null);
+                        int count = (int) maxOnCellField.get(null);
                         if ((male + female + childCount) < count) {
                             Constructor<Animal> constr = c.getConstructor();
                             for (int k = 0; k <= childCount; k++) {
@@ -95,7 +95,8 @@ public class GeneratorFauna {
                                 }
                             }
                         }
-                    } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException |
+                    } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException |
+                             InvocationTargetException |
                              InstantiationException e) {
                         throw new RuntimeException(e);
                     }
