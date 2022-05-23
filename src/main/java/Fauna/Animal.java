@@ -30,7 +30,8 @@ public abstract class Animal {
         setGender();
     }
 
-    public abstract void eat(List<?> listOfFood);
+    //костыль, что бы можно было выбрать рацион
+    public abstract void eat(List<?> listOfFood, List<?> listOfFood1);
 
     public MovementDirection setDirection(){
         MovementDirection movementDirection;

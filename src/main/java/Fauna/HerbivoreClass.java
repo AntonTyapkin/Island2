@@ -14,7 +14,7 @@ public class HerbivoreClass extends Animal implements Herbivor{
     }
 
     @Override
-    public void eat(List<?> listOfFood) {
+    public void eat(List<?> listOfFood, List<?> listOfFood1) {
         if (this.getSatiety() < this.getMaxSatiety()) {
             double diff = this.getMaxSatiety() - this.getSatiety();
             if (listOfFood.size() > diff) {

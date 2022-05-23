@@ -49,7 +49,7 @@ public class Cell {
     public void addHerb() {
         if (this.herbs.size() < Settings.herbsMaxOnCell) {
             int diff = Settings.herbsMaxOnCell - this.herbs.size();
-            int getIntCalculate = ThreadLocalRandom.current().nextInt(1, diff);
+            int getIntCalculate = ThreadLocalRandom.current().nextInt(0, diff);
             for (int i = 0; i < getIntCalculate; i++) {
                 this.herbs.add(new Herb());
             }
@@ -130,7 +130,7 @@ public class Cell {
                 goat++;
             } else if (herbivor.getClass().equals(Sheep.class)) {
                 sheep++;
-            } else if (herbivor.getClass().equals(Kangoroo.class)) {
+            } else if (herbivor.getClass().equals(Boar.class)) {
                 kangoroo++;
             } else if (herbivor.getClass().equals(Cow.class)) {
                 cow++;
@@ -177,10 +177,10 @@ public class Cell {
 
     public void tryToEat(){
         for (Animal predator : predators) {
-            predator.eat(herbivors);
+            predator.eat(herbivors, predators);
         }
         for (Animal herbivore : herbivors) {
-            herbivore.eat(herbs);
+            herbivore.eat(herbs,herbivors);
         }
     }
 

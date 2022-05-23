@@ -14,12 +14,12 @@ import Fauna.HerbivoreClass;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Duck extends HerbivoreClass implements Herbivor {
+public class Boar extends HerbivoreClass implements Herbivor {
 
-    private static int maxOnCell = Settings.duckMaxOnCell;
+    private static int maxOnCell = Settings.boarMaxOnCell;
 
-    public Duck() {
-        super(1, 1, 0.15, 4);
+    public Boar() {
+        super(47, 2, 7, 8);
     }
 
     public static int getMaxOnCell() {
@@ -31,14 +31,21 @@ public class Duck extends HerbivoreClass implements Herbivor {
         try {
             if (this.getSatiety() < this.getMaxSatiety()) {
                 int eatChance = ThreadLocalRandom.current().nextInt(0, 100);
-                if (eatChance > 10) {
+                if (eatChance > 50) {
                     double diff = this.getMaxSatiety() - this.getSatiety();
                     if (listOfFood.size() > diff) {
                         this.setSatiety(this.getMaxSatiety());
                         this.setStarvingTime(this.getMaxStarvingTime());
                         listOfFood.subList(0, (int)diff).clear();
                     }
-                } else {
+                } else if (eatChance > 10 && eatChance < 50){
+                    for (Object predator : listOfFood1) {
+                        Animal predator1 = (Animal) predator;
+                        if (predator1.getClass().getSimpleName().equals("Hamster")) {
+                            listOfFood1.remove(predator);
+                        }
+                    }
+                } else if (eatChance < 10) {
                     for (Object predator : listOfFood1) {
                         Animal predator1 = (Animal) predator;
                         if (predator1.getClass().getSimpleName().equals("Caterpillar")) {

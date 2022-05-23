@@ -26,24 +26,34 @@ public class PrintStatictic implements Runnable {
     }
 
     public static void printStat(Cell[][] objects) {
-        for (int i = 0; i < objects.length; i++) {
-            for (int j = 0; j < objects[i].length; j++) {
-                System.out.print("Ячейка - " + i + "x" + j);
-                System.out.println(" Растений - " + objects[i][j].countHerbs()
-                        + " Хищников - " + objects[i][j].countPredators() + " Травоядных - " + objects[i][j].countHerbivores() + "\n"
-                        + objects[i][j].countEachPredator() + "\n"
-                        + objects[i][j].countEachHerbivore());
+        try{
+            for (int i = 0; i < objects.length; i++) {
+                for (int j = 0; j < objects[i].length; j++) {
+                    System.out.print("Ячейка - " + i + "x" + j);
+                    System.out.println(" Растений - " + objects[i][j].countHerbs()
+                            + " Хищников - " + objects[i][j].countPredators() + " Травоядных - " + objects[i][j].countHerbivores() + "\n"
+                            + objects[i][j].countEachPredator() + "\n"
+                            + objects[i][j].countEachHerbivore());
+                }
             }
+            System.out.println("------------------");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("------------------");
+
     }
 
     public static void addHerbs(Cell[][] objects) {
-        for (int i = 0; i < objects.length; i++) {
-            for (int j = 0; j < objects[i].length; j++) {
-                objects[i][j].addHerb();
+        try {
+            for (int i = 0; i < objects.length; i++) {
+                for (int j = 0; j < objects[i].length; j++) {
+                    objects[i][j].addHerb();
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
 }

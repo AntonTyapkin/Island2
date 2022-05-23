@@ -8,7 +8,7 @@ package Island;
 
 public class Island {
 
-    private static final Cell[][] island = new Cell[2][2];
+    private static final Cell[][] island = new Cell[10][10];
 
     public Island() {
         for (int i = 0; i < island.length; i++) {

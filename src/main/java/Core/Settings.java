@@ -24,7 +24,7 @@ public class Settings {
         wolfMap.put("Hamster",80);
         wolfMap.put("Goat",60);
         wolfMap.put("Sheep",70);
-        wolfMap.put("Kangoroo",15);
+        wolfMap.put("Boar",15);
         wolfMap.put("Cow",10);
         wolfMap.put("Duck",40);
 
@@ -45,7 +45,7 @@ public class Settings {
         bearMap.put("Hamster",90);
         bearMap.put("Goat",70);
         bearMap.put("Sheep",70);
-        bearMap.put("Kangoroo",50);
+        bearMap.put("Boar",50);
         bearMap.put("Cow",20);
         bearMap.put("Duck",10);
 
@@ -68,7 +68,7 @@ public class Settings {
     public static int hamsterMaxOnCell = 500;
     public static int goatMaxOnCell = 140;
     public static int sheepMaxOnCell = 50;
-    public static int kangorooMaxOnCell = 10;
+    public static int boarMaxOnCell = 10;
     public static int cowMaxOnCell = 10;
     public static int duckMaxOnCell = 200;
     public static int caterpillarMaxOnCell = 1000;
