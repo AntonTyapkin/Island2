@@ -56,8 +56,8 @@ public class Settings {
     }
 
     //Размеры острова
-    public static int maxY = 3;
-    public static int maxX = 3;
+    public static int maxY = 100;
+    public static int maxX = 20;
     //Максимальное кол-во зверей в клетках
     //Хищники
     public static int wolfMaxOnCell = 30;
